@@ -7,25 +7,15 @@
 # a) Usar o json ou xml disponível como fonte dos dados do faturamento mensal;
 # b) Podem existir dias sem faturamento, como nos finais de semana e feriados. Estes dias devem ser ignorados no cálculo da média;
 
-
-#CRIANDO O JSON
+#CONSUMINDO JSON
 
 import json
 
-dicionario = {"1":1000, "2":1500, "3": 7000, "4": 756, "5":1500, "6":1500 , "7":1500, "8":1500, "9":1500, "10":1500, "11":1500, "12":1500, "13":1500, "14":1500, "15":1500,
-              "16":1000, "17":1500, "18": 0, "19": 0, "20":1500, "21":1500 , "22":1500, "23":0, "24":1500, "25":1500, "26":0, "27":0, "28":1500, "29":1500,
-              "30":1000}
-
-with open("arquivo.json", "w", encoding="utf-8") as arquivo:
-    arquivo = json.dump(dicionario, arquivo)
-
-#CONTINUAÇÃO DO PROGRAMA APÓS CRIAÇÃO DO JSON
-
-with open("arquivo.json", "r") as arquivo:
-    dict_arquivo = json.load(arquivo)
+with open("dados.json", "r") as arquivo:
+    vetor_inicial = json.load(arquivo)
     vetor_faturamento = []
-    for value in dict_arquivo.values():
-        vetor_faturamento.append(value)
+    for dicts in vetor_inicial:
+        vetor_faturamento.append(dicts["valor"])
     
     #CALCULO MENOR VALOR DE FATURAMENTO (SEM CONTAR COM FATURAMENTO NULO) - SEM UTILIZAR A FUNÇÃO PRONTA min()
 
